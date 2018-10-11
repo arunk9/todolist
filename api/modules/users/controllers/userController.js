@@ -2,73 +2,73 @@
 
 
 var mongoose = require("mongoose");
-var Task = mongoose.model("Task");
+var User = mongoose.model("User");
 
-// GET All Tasks
-exports.getAllTasks = (req, res) => {
-	console.log("This is a get all available tasks api request");
-	Task.find({username: req.params.username},(err, tasks) =>{
+// GET All Users
+exports.getAllUsers = (req, res) => {
+	console.log("This is a get all available Users api request");
+	User.find({},(err, Users) =>{
 		if (err) {
 			res.send(err);
 			console.error(err);
 		}
 
-		res.json(tasks);
+		res.json(Users);
 	});
 };
 
-// Create a New Task
-exports.addTask = (req, res) => {
-	console.log("POST API request to create a new Task");
-	var new_task = new Task(req.body);
-	new_task.save((err, task) => {
+// Create a New User
+exports.addUser = (req, res) => {
+	console.log("POST API request to create a new User");
+	var newUser = new User(req.body);
+	newUser.save((err, User) => {
 		if (err) {
 			// error in api request
 			res.send(err);
 			console.error(err);
 		}
 
-		res.json(task);
+		res.json(User);
 	});
 };
 
-// Get a new task by Id
-exports.showTask = (req, res) => {
-	console.log("GET a task by specific ID");
-	Task.findById(req.params.taskId, (err, task) => {
+// Get a new User by Id
+exports.showUser = (req, res) => {
+	console.log("GET a User by specific ID");
+	User.findById(req.params.UserId, (err, User) => {
 		if (err) {
 			console.error(err);
 			res.send(err);
 		}
 
-		res.json(task);
+		res.json(User);
 	});
 };
 
-// Update an existing task
-exports.updateTask = (req, res) => {
-	console.log("PUT API request to update an existing task");
+// Update an existing User
+exports.updateUser = (req, res) => {
+	console.log("PUT API request to update an existing User");
 
-	Task.findOneAndUpdate({_id: req.params.taskId}, (err, task) => {
+	User.findOneAndUpdate({_id: req.params.UserId}, (err, User) => {
 		if (err) {
 			console.error(err);
 			res.send(err);
 		}
 
-		res.json(task);
+		res.json(User);
 	});
 };
 
-// Delete an existing task
-exports.updateTask = (req, res) => {
-	console.log("DELETE API request to remove an existing task");
+// Delete an existing User
+exports.removeUser = (req, res) => {
+	console.log("DELETE API request to remove an existing User");
 
-	Task.remove({_id: req.params.taskId}, (err, task) => {
+	User.remove({_id: req.params.UserId}, (err, User) => {
 		if (err) {
 			console.error(err);
 			res.send(err);
 		}
 
-		res.json({"message": "Task Deleted Successfully"});
+		res.json({"message": "User Deleted Successfully"});
 	});
 };

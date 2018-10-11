@@ -1,18 +1,15 @@
 'use strict';
 
-module.exports = function(app) {
-	var todoList = require("../controllers/todoListController.js");
+var express = require('express')
+var router = express.Router()
 
-	// todo task routes
-	app.route('/tasks')
-		.post(todoList.addTask);   // create a new task
+var todoList = require("../controllers/todoListController.js");
 
-	// todo task routes
-	app.route('/:username/tasks')
-		.get(todoList.getAllTasks); // get all the tasks based on the username
+// Task CRUD operations
+router.get('/:username/tasks', todoList.getUserTasks); // get all task associated to user
+router.post('/:username/task', todoList.addTask);   // create a new task
+router.get('/tasks/:taskId' ,todoList.showTask); // get a specific task
+router.put('/tasks/:taskId', todoList.updateTask); // udpate a specific task
+router.delete('/tasks/:taskId' ,todoList.removeTask); // delete a specific task
 
-	app.route('/tasks/:taskId')
-		.get(todoList.showTask) // get a specific task
-		.put(todoList.updateTask)
-		.delete(todoList.removeTask);
-};
+module.exports = router

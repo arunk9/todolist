@@ -4,6 +4,8 @@ var port = process.env.port || 5000;
 var mongoose = require("mongoose");
 
 var Task = require("./api/modules/todoList/models/todoListModel.js");
+var User = require("./api/modules/users/models/userModel.js");
+
 var bodyParser = require("body-parser");
 
 app.listen(port);
@@ -18,10 +20,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Load the todoApp api routes
-var routes = require('./api/modules/todoList/routes/todoListRoute.js');
+//var routes = require('./api/modules/todoList/routes/todoListRoute.js');
 
 //register the route
-routes(app);
+//routes(app);
+
+app.use('/api', require('./api/modules/todoList/routes/todoListRoute.js'));
+app.use('/api', require('./api/modules/users/routes/userRoute.js'));
 
 
 // welcome page

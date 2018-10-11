@@ -5,7 +5,7 @@ var mongoose = require("mongoose");
 var Task = mongoose.model("Task");
 
 // GET All Tasks
-exports.getAllTasks = (req, res) => {
+exports.getUserTasks = (req, res) => {
 	console.log("This is a get all available tasks api request");
 	Task.find({username: req.params.username},(err, tasks) =>{
 		if (err) {
@@ -60,7 +60,7 @@ exports.updateTask = (req, res) => {
 };
 
 // Delete an existing task
-exports.updateTask = (req, res) => {
+exports.removeTask = (req, res) => {
 	console.log("DELETE API request to remove an existing task");
 
 	Task.remove({_id: req.params.taskId}, (err, task) => {

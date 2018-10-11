@@ -5,8 +5,9 @@ var Schema = mongoose.Schema;
 
 // declaring the task collection schema
 var taskSchema = new Schema({
-	username: {
-		type: String,
+	user_id: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User',
 		required: "Need username to associate a task"
 	},
 	task_name: {

@@ -3,14 +3,16 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-// declaring the task collection schema
+// declaring the user collection schema
 var userSchema = new Schema({
 	username: {
 		type: String,
+		unique: true,
 		required: "Please enter the username"
 	},
 	email: {
 		type: String,
+		unique: true,
 		required: "Please enter the user's email"
 	},
 	created_date: {
@@ -26,4 +28,4 @@ var userSchema = new Schema({
 	}
 });
 
-module.exports = mongoose.model('User', taskSchema);
+module.exports = mongoose.model('User', userSchema);
