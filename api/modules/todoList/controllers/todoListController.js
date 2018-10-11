@@ -20,6 +20,7 @@ exports.getUserTasks = (req, res) => {
 // Create a New Task
 exports.addTask = (req, res) => {
 	console.log("POST API request to create a new Task");
+	req.body.user_id = req.params.userId;
 	var new_task = new Task(req.body);
 	new_task.save((err, task) => {
 		if (err) {

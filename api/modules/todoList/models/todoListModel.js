@@ -8,7 +8,7 @@ var taskSchema = new Schema({
 	user_id: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',
-		required: "Need username to associate a task"
+		required: "Need userId to associate a task"
 	},
 	task_name: {
 		type: String,
