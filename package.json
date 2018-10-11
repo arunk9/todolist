@@ -1,0 +1,32 @@
+{
+  "name": "todoapilist",
+  "version": "1.0.0",
+  "description": "sample node app with rests apis for todo app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arunk9/todolist.git"
+  },
+  "keywords": [
+    "RESTful",
+    "API",
+    "Node"
+  ],
+  "author": "Arun Kadiveru",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arunk9/todolist/issues"
+  },
+  "homepage": "https://github.com/arunk9/todolist#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.3.1"
+  }
+}
