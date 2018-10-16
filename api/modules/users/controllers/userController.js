@@ -2,6 +2,32 @@
 
 var mongoose = require("mongoose");
 var User = mongoose.model("User");
+const bcrypt = require('bcrypt');
+
+// Create a New User
+exports.addUser = (req, res) => {
+	console.log("POST API request to create a new User");
+	var userData = req.body;
+	
+	// encrypt password and save user to DB
+	bcrypt.hash(req.body.password, 5, (error, hash) => {
+			if (error) {
+				console.log("error while generating password hash");
+				res.send(error);
+			}
+			userData.password = hash;
+			var newUser = new User(userData);
+			newUser.save((err, User) => {
+				if (err) {
+					// error in api request
+					res.send(err);
+					console.error(err);
+				}
+
+				res.json(User);
+			});
+	});
+};
 
 // GET All Users
 exports.getAllUsers = (req, res) => {
@@ -13,21 +39,6 @@ exports.getAllUsers = (req, res) => {
 		}
 
 		res.json(Users);
-	});
-};
-
-// Create a New User
-exports.addUser = (req, res) => {
-	console.log("POST API request to create a new User");
-	var newUser = new User(req.body);
-	newUser.save((err, User) => {
-		if (err) {
-			// error in api request
-			res.send(err);
-			console.error(err);
-		}
-
-		res.json(User);
 	});
 };
 

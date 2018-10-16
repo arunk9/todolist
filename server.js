@@ -10,8 +10,6 @@ var bodyParser = require("body-parser");
 var Task = require("./api/modules/todoList/models/todoListModel.js");
 var User = require("./api/modules/users/models/userModel.js");
 
-
-
 // =======================
 // configuration =========
 // =======================
@@ -35,18 +33,19 @@ app.use(bodyParser.json());
 
 //register the route
 //routes(app);
+// welcome page
+app.get('/', (req, res) => {
+	res.send("Hello World. This is a ToDo List App");
+});
+
 
 app.use('/api', require('./api/modules/login/routes/loginRoute.js'));
 
 //app.use('/api', require('./api/modules/todoList/routes/todoListRoute.js'));
 
+//app.use('/api', authGuard.authenticate);
 // USER resource HTTP verbs
 app.use('/api/users', require('./api/modules/users/routes/userRoute.js'));
 
-
-// welcome page
-app.get('/', (req, res) => {
-	res.send("Hello World. This is a ToDo List App");
-});
 
 console.log("NodeJs server started on port " + port + " successfully");
