@@ -1,9 +1,11 @@
 'use strict';
 
-module.exports = function(app) {
-	var login = require("../controllers/loginController.js");
+var express = require('express')
+var router = express.Router()
 
-	// user login route
-	app.route('/login')
-		.post(todoList.addTask);
-};
+var login = require("../controllers/loginController.js");
+
+// login request
+router.post('/login', login.authenticate);
+
+module.exports = router
