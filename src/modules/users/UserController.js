@@ -1,13 +1,12 @@
-import { Mongoose } from "mongoose";
-import { UserSchema } from "./UserModel.js";
+var User = require("./UserModel.js");
 
 // User controller for handling all user relation CRUD opertaions
 export class UserController {
 
     // Create a new user
     addNewUser = (req, res) => {
-        let newUser = new UserSchema(req.body);
-
+        let newUser = new User(req.body);
+        Console.log("Create New User API Request");
         newUser.save((err, user) => {
             if (err) {
                 console.error("Error while creating new user.");
@@ -21,8 +20,8 @@ export class UserController {
 
     // Get a user by object Id
     getUserById = (req, res) => {
-        
-        UserSchema.findById({}, (err, user) => {
+        Console.log("GET User API Request");
+        User.findById({}, (err, user) => {
             if (err) {
                 console.error("Error while reading user information.");
                 res.send();
@@ -34,8 +33,8 @@ export class UserController {
 
     // Get all users information
     getAllUsers = (req, res) => {
-        
-        UserSchema.find({}, (err, users) => {
+        Console.log("GET Users API Request");
+        User.find({}, (err, users) => {
             if (err) {
                 console.error("Error while reading users information.");
                 res.send();
@@ -47,8 +46,8 @@ export class UserController {
 
     // Update a user information
     updateUser = (req, res) => {
-        
-        UserSchema.findOneAndUpdate({_id: req.params.userId}, (err, user) => {
+        Console.log("UPDATE Users API Request");
+        User.findOneAndUpdate({_id: req.params.userId}, (err, user) => {
             if (err) {
                 console.error("Error while updating user's information.");
                 res.send();
@@ -60,8 +59,8 @@ export class UserController {
 
     // Delete a user
     deleteUser = (req, res) => {
-        
-        UserSchema.remove({_id: req.params.userId}, (err, user) => {
+        Console.log("DELETE Users API Request");
+        User.remove({_id: req.params.userId}, (err, user) => {
             if (err) {
                 console.error("Error while deleting user's information.");
                 res.send();

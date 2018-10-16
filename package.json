@@ -27,6 +27,8 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "swagger-node-express": "~2.0",
+    "minimist": "*",
     "mongoose": "^5.3.1"
   }
 }

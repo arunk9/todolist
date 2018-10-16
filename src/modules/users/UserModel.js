@@ -4,7 +4,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 // declaring the user collection schema
-export const UserSchema = new Schema({
+UserSchema = new Schema({
 	username: {
 		type: String,
 		unique: true,
@@ -27,3 +27,8 @@ export const UserSchema = new Schema({
 		default: ['regular']
 	}
 });
+
+/**
+ * @typedef TodoSchema
+ */
+export default mongoose.model('User', UserSchema);
