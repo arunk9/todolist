@@ -37,10 +37,10 @@ app.get('/', (req, res) => {
 app.use('/api', require('./api/modules/login/routes/loginRoute'));
 
 
-app.use('/api', authGuard.authenticate);
+//app.use('/api', authGuard.authenticate);
 
 // User resource HTTP verbs
-app.use('/api', require('./api/modules/users/routes/userRoute'));
+app.use('/api/users', require('./api/modules/users/routes/userRoute'));
 
 // User Task resource HTTP verbs
 app.use('/api', require('./api/modules/todoList/routes/todoListRoute'));
