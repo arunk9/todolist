@@ -4,7 +4,7 @@
   "description": "sample node app with rests apis for todo app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,9 @@
   },
   "homepage": "https://github.com/arunk9/todolist#readme",
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "mocha": "^5.2.0",
     "nodemon": "^1.18.4"
   },
   "dependencies": {

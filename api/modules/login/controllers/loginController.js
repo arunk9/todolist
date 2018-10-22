@@ -5,7 +5,7 @@ var User = mongoose.model("User");
 var bcrypt = require("bcrypt");
 
 // Create a New Task
-exports.authenticate = (req, res) => {
+exports.login = (req, res) => {
 	User.findOne({username: req.body.username}, (err, user) => {
 		if (err) {
 			console.error(err);

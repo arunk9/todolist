@@ -41,7 +41,6 @@ app.get('/', (req, res) => {
 
 app.use('/api', require('./api/modules/login/routes/loginRoute.js'));
 
-//app.use('/api', require('./api/modules/todoList/routes/todoListRoute.js'));
 
 //app.use('/api', authGuard.authenticate);
 // USER resource HTTP verbs

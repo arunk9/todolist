@@ -3,9 +3,9 @@
 var express = require('express')
 var router = express.Router()
 
-var login = require("../controllers/loginController.js");
+var loginController = require("../controllers/loginController.js");
 
 // login request
-router.post('/login', login.authenticate);
+router.post('/login', loginController.login);
 
 module.exports = router
