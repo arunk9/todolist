@@ -29,23 +29,21 @@ app.use(bodyParser.json());
 // =======================
 // routes ================
 // =======================
-// Load the todoApp api routes
-//var routes = require('./api/modules/todoList/routes/todoListRoute.js');
-
-//register the route
-//routes(app);
-// welcome page
 app.get('/', (req, res) => {
 	res.send("Hello World. This is a ToDo List App");
 });
 
 
-app.use('/api', require('./api/modules/login/routes/loginRoute.js'));
+app.use('/api', require('./api/modules/login/routes/loginRoute'));
 
 
 app.use('/api', authGuard.authenticate);
-// USER resource HTTP verbs
-app.use('/api/users', require('./api/modules/users/routes/userRoute.js'));
+
+// User resource HTTP verbs
+app.use('/api', require('./api/modules/users/routes/userRoute'));
+
+// User Task resource HTTP verbs
+app.use('/api', require('./api/modules/todoList/routes/todoListRoute'));
 
 
 console.log("NodeJs server started on port " + port + " successfully");

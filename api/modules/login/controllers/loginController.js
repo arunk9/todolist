@@ -34,6 +34,8 @@ exports.login = (req, res) => {
 					res.json({
 						success: true,
 						message: "User Authentication successful",
+						id: user._id,
+						role: user.role,
 						payload: token
 					})
 				}else{
