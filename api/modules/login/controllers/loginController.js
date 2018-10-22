@@ -1,8 +1,11 @@
 'use strict';
 
-var mongoose = require("mongoose");
-var User = mongoose.model("User");
-var bcrypt = require("bcrypt");
+const mongoose = require("mongoose");
+const User = mongoose.model("User");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const config = require('../../../../config'); // get our config file
+
 
 // Create a New Task
 exports.login = (req, res) => {
@@ -24,8 +27,8 @@ exports.login = (req, res) => {
 						user: user
 					};
 
-					var token = jwt.sign(payload, app.get('superSecret'), {
-						expiresInMinutes: 1440 // expires in 24 hours
+					var token = jwt.sign(payload, config.secret, {
+						expiresIn: 86440 // expires in 24 hours
 					});
 
 					res.json({

@@ -9,6 +9,7 @@ var bodyParser = require("body-parser");
 
 var Task = require("./api/modules/todoList/models/todoListModel.js");
 var User = require("./api/modules/users/models/userModel.js");
+var authGuard = require("./api/middleware/authMiddleware.js");
 
 // =======================
 // configuration =========
@@ -42,7 +43,7 @@ app.get('/', (req, res) => {
 app.use('/api', require('./api/modules/login/routes/loginRoute.js'));
 
 
-//app.use('/api', authGuard.authenticate);
+app.use('/api', authGuard.authenticate);
 // USER resource HTTP verbs
 app.use('/api/users', require('./api/modules/users/routes/userRoute.js'));
 
