@@ -6,7 +6,7 @@ var Task = mongoose.model("Task");
 // GET All Tasks
 exports.getUserTasks = (req, res) => {
 	console.log("This is a get all available tasks api request");
-	Task.find({username: req.params.username},(err, tasks) =>{
+	Task.find({user_id: req.params.userId},(err, tasks) =>{
 		if (err) {
 			res.send(err);
 			console.error(err);

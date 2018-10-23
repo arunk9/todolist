@@ -32,7 +32,7 @@ exports.addUser = (req, res) => {
 // GET All Users
 exports.getAllUsers = (req, res) => {
 	console.log("This is a get all available Users api request");
-	User.find({},(err, Users) =>{
+	User.find({}, (err, Users) =>{
 		if (err) {
 			res.send(err);
 			console.error(err);
