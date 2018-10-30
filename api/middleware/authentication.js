@@ -16,7 +16,7 @@ exports.default = (req, res, next) => {
         return next();
       }
       // Token missing userId
-      res.status = 401;
+      res.status(401);
       return res.json({ success: false, message: 'Failed to authenticate token'});
     }
     // Token most likely expired

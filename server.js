@@ -6,6 +6,12 @@ var config = require('./config'); // get our config file
 var bodyParser = require("body-parser");
 
 // =======================
+// models ================      // models to be loaded before interpretation of routes
+// ======================= 
+var Task = require("./api/modules/todoList/models/todoListModel.js");
+var User = require("./api/modules/users/models/userModel.js");
+
+// =======================
 // configuration =========
 // =======================
 app.listen(port);
@@ -38,3 +44,5 @@ app.use('/api', require('./api/modules/todoList/routes/todoListRoute'));
 
 
 console.log("NodeJs server started on port " + port + " successfully");
+
+module.exports = app;

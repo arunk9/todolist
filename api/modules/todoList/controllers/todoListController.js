@@ -12,7 +12,7 @@ exports.getUserTasks = (req, res) => {
 			console.error(err);
 		}
 
-		res.json(tasks);
+		res.json(tasks ? tasks : []);
 	});
 };
 
@@ -32,16 +32,21 @@ exports.addTask = (req, res) => {
 	});
 };
 
-// Get a new task by Id
+// Get a task by Id associated to logged_in user
 exports.showTask = (req, res) => {
 	console.log("GET a task by specific ID");
-	Task.findById(req.params.taskId, (err, task) => {
+	Task.findOne({_id: req.params.taskId, user_id: req.token.user._id}, (err, task) => {
 		if (err) {
 			console.error(err);
 			res.send(err);
 		}
 
-		res.json(task);
+		if (task) {
+			res.json(task);
+		} else {
+			res.status(204).json({"message" : "This task is not associated to the current user"});
+		}
+		
 	});
 };
 
@@ -49,13 +54,17 @@ exports.showTask = (req, res) => {
 exports.updateTask = (req, res) => {
 	console.log("PUT API request to update an existing task");
 
-	Task.findOneAndUpdate({_id: req.params.taskId}, (err, task) => {
+	Task.findOneAndUpdate({_id: req.params.taskId, user_id: req.token.user._id}, (err, task) => {
 		if (err) {
 			console.error(err);
 			res.send(err);
 		}
 
-		res.json(task);
+		if (task) {
+			res.json(task);
+		} else {
+			res.status(403).json({"message" : "Error in updating task. This task is not associated to the current user"});
+		}
 	});
 };
 
@@ -63,7 +72,7 @@ exports.updateTask = (req, res) => {
 exports.removeTask = (req, res) => {
 	console.log("DELETE API request to remove an existing task");
 
-	Task.remove({_id: req.params.taskId}, (err, task) => {
+	Task.remove({_id: req.params.taskId, user_id: req.token.user._id}, (err) => {
 		if (err) {
 			console.error(err);
 			res.send(err);

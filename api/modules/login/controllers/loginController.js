@@ -9,6 +9,7 @@ const config = require('../../../../config'); // get our config file
 
 // Create a New Task
 exports.login = (req, res) => {
+	console.log("POST API request to login user");
 	User.findOne({username: req.body.username}, (err, user) => {
 		if (err) {
 			console.error(err);
@@ -39,6 +40,7 @@ exports.login = (req, res) => {
 						payload: token
 					})
 				}else{
+					res.status(401);
 					res.json({ 
 						success: false,
 						message: 'Authentication failed. Invalid User Credentials.'
@@ -46,11 +48,11 @@ exports.login = (req, res) => {
 				}
 			});
 		} else {
+			res.status(401);
 			res.json({ 
 				success: false,
-				message: 'Authentication failed. User not found.'
+				message: 'Authentication failed. Please verify username and password.'
 			});
 		}
 	});
-	console.log("POST API request to login user");
 };

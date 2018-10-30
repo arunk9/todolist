@@ -3,7 +3,6 @@
 var express = require('express')
 var router = express.Router()
 var user = require("../controllers/userController.js");
-var authGuard = require("../../../middleware/authMiddleware");
 var protectedRoute = require("../../../middleware/authentication");
 
 // User CRUD operations

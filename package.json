@@ -4,7 +4,8 @@
   "description": "sample node app with rests apis for todo app",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "start": "npm run start",
+    "test": "mocha \"test/**/*.js\""
   },
   "repository": {
     "type": "git",
