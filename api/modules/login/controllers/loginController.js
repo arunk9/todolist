@@ -32,6 +32,7 @@ exports.login = (req, res) => {
 						expiresIn: 86440 // expires in 24 hours
 					});
 
+					res.status(200);
 					res.json({
 						success: true,
 						message: "User Authentication successful",
