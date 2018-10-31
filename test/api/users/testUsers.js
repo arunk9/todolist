@@ -6,16 +6,14 @@ const server = require("../../../server");
 const authToken = require("../../../api/middleware/auth");
 const bcrypt = require("bcrypt");
 let should = chai.should();
-// let mongoose = require("mongoose");
 let User = require("../../../api/modules/users/models/userModel");
-// let userController = require("../../../api/modules/login/controllers/loginController");
 
 chai.use(chaitHttp);
 
 describe("Set User auth token before each request", () => {
+    let currentUser = null;
+    let accessToken = null;
     before((done) => {
-        var currentUser = null;
-        var accessToken = null;
 
         let userData = {
             username: "testAdmin",
@@ -23,41 +21,35 @@ describe("Set User auth token before each request", () => {
             role: "admin"
         }
 
-        // encrypt password and save user to DB
-	    bcrypt.hash('123456', 5, (error, hash) => {
-			if (error) {
-				console.log("error while generating password hash");
-				res.send(error);
-			}
-			userData.password = hash;
-			var newUser = new User(userData);
-			newUser.save((err, User) => {
-				if (err) {
-					// error in api request
-					console.error(err);
-				}
-            });
-
-            this.currentUser = newUser;
+	    userData.password = bcrypt.hashSync('123456', 5);
+        currentUser = new User(userData);
+        currentUser.save((err, User) => {
+            if (err) {
+                console.error(err);
+            }
         });
-        console.log(currentUser);
+
         accessToken = authToken.issueAccessToken(currentUser._id);
+        done();
     });
 
     after((done) => {
+        console.log("after method");
         User.remove({_id: currentUser._id}, (err, User) => {
             if (err) {
                 console.error(err);
             }
             console.log("User Deleted Successfully");
         });
+        done();
     });
 
     describe('create user', () => {
         it('should create a user', (done) => {
             let userData = {
                 username: "test",
-                email: "test@test.com"
+                email: "test@test.com",
+                password:"123456"
             };
             
             chai.request(server)

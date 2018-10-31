@@ -4,14 +4,22 @@ const auth = require("./auth");
 
 exports.default = (req, res, next) => {
 
-  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  var token = req.body.token || req.query.token || req.headers['x-access-token']; 
 
   if (token) {
     const decodedToken = auth.decodeToken(token);
+    var userId = null;
+    
     if (decodedToken) {
       req.token = decodedToken;
-      if (req.token.user._id) {
-        const accessToken = auth.issueAccessToken(req.token.user._id);
+      if (req.token.user) {
+        userId = req.token.user._id;
+      } else {
+        userId = req.token.userId;  // in unit test we are creating access token just using userId
+      }
+
+      if (userId) {
+        const accessToken = auth.issueAccessToken(userId);
         res.header('Access-Token', accessToken);
         return next();
       }
